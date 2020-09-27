@@ -1,3 +1,4 @@
+#컴네 2-4
 from socket import *
 
 serverName = 'hostname'
