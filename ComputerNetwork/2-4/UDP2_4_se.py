@@ -1,11 +1,16 @@
 #컴네 2-4
+#20151167 이인재
 #서버 소스코드
 from socket import *
 
+#서버의 포트번호 지정
 serverPort = 12000
+#UDP 소켓생성
 serverSocket = socket(AF_INET, SOCK_DGRAM)
+#서버의 주소와 포트 바인딩
 serverSocket.bind(('localhost', serverPort))
 
+#소문자 입력을 위한 안내
 print("The server is ready to receive")
 
 while 1:
