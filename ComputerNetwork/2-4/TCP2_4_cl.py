@@ -13,10 +13,10 @@ clientSocket.connect((serverName, serverPort))
 
 #문자가 입력받을 수 있도록 input 함수 사용
 sentence = input('input lowercase sentence:')
-#소켓을 통해 서버로 문장 전송
+#소켓을 통해 서버로 문장 전송, 전송과정에서 바이트 스트림 형태로 인코딩 수행
 clientSocket.send(sentence.encode())
 #수정된 문장을 서버로부터 전송받음
-modifiedSentence = clientSocket.recv(1024)
+modifiedSentence = clientSocket.recv(2048)
 
 #수정된 문장을 출력
 print("From Server: ", modifiedSentence)
