@@ -7,7 +7,7 @@ serverPort = 12000
 
 #TCP소켓 생성
 serverSocket = socket(AF_INET, SOCK_STREAM)
-serverSocket.bind(('',serverPort))
+serverSocket.bind(('127.0.0.1',serverPort))
 serverSocket.listen(1)
 
 print('The server is ready to receive')
