@@ -1,0 +1,10 @@
+﻿  main.c
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(14,2): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TreeNode' 왼쪽은 무시됩니다.
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(27,15): warning C4047: '==': 'FILE *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(38,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(21,7): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(22,7): warning C4101: 'sentence' :참조되지 않은 지역 변수입니다.
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(101,15): warning C4047: '==': 'FILE *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(95,7): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
+C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(96,7): warning C4101: 'sentence' :참조되지 않은 지역 변수입니다.
+  assignment1_2.vcxproj -> C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\Debug\assignment1_2.exe
