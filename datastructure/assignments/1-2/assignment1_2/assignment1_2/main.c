@@ -7,21 +7,21 @@
 
 typedef struct TreeNode* TreeNodePtr;
 
-//Æ®¸®³ëµå ±¸Á¶Ã¼ »ý¼º
-typedef struct TreeNode 
+//Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+typedef struct TreeNode
 {
 	int weight;
 	TreeNodePtr left_child;
 	TreeNodePtr right_child;
-};
+}TreeNode;
 
-//È÷ÇÁÅ¸ÀÔÀÇ ¼Ó¼º ±¸Á¶Ã¼ »ý¼º
+//ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 typedef struct {
 	TreeNodePtr ptree;
 	int key;
 }element;
 
-//È÷ÇÁÅ¸ÀÔ ±¸Á¶Ã¼ »ý¼º
+//ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 typedef struct {
 	element heap[MAX_ELEMENT];
 	int heap_size;
@@ -29,35 +29,35 @@ typedef struct {
 
 typedef HeapType* HeapTypePtr;
 
-//È÷ÇÁ »ý¼º ÇÔ¼ö
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 HeapTypePtr create() {
 	return (HeapTypePtr)malloc(sizeof(HeapType));
 }
-//È÷ÇÁ ÃÊ±âÈ­ ÇÔ¼ö
+//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Ô¼ï¿½
 void init(HeapTypePtr h)
 {
 	h->heap_size = 0;
 }
 
-//È÷ÇÁ »ðÀÔ ÇÔ¼ö
-void insert_min_heap(HeapTypePtr h, element item) 
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+void insert_min_heap(HeapTypePtr h, element item)
 {
-	//È÷ÇÁÀÇ Å©±â¸¦ ´ãÀ» º¯¼ö i
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ i
 	int i;
 	i = ++(h->heap_size);
 
-	//ºÎ¸ð³ëµå¿Í ºñ±³¹Ýº¹¹®
-	while ((i != 1) && (item.key < h ->heap[i / 2].key)) 
+	//ï¿½Î¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ñ±³¹Ýºï¿½ï¿½ï¿½
+	while ((i != 1) && (item.key < h ->heap[i / 2].key))
 	{
 		h->heap[i] = h->heap[i / 2];
 		i /= 2;
 	}
-	//»õ·Î¿î ³ëµå¸¦ ÇØ´ç À§Ä¡¿¡ »ðÀÔ
+	//ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½å¸¦ ï¿½Ø´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	h->heap[i] = item;
 }
 
-//È÷ÇÁ»èÁ¦ ÇÔ¼ö
-element element_delete_min_heap(HeapTypePtr h) 
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+element delete_min_heap(HeapTypePtr h)
 {
 	int parent, child;
 	element item, temp;
@@ -68,12 +68,12 @@ element element_delete_min_heap(HeapTypePtr h)
 	child = 2;
 
 	while (child <= h->heap_size) {
-		//ÇöÀç ³ëµåÀÇ ÀÚ½Ä³ëµå Áß ´õ ÀÛÀº ÀÚ½Ä ³ëµå¸¦ Ã£´Â´Ù
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½Ä³ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½å¸¦ Ã£ï¿½Â´ï¿½
 		if ((child < h->heap_size) && (h->heap[child].key) > h->heap[child + 1].key)
 			child++;
 		if (temp.key <= h->heap[child].key)
 			break;
-		//ÇÑ´Ü°è ¾Æ·¡·Î ÀÌµ¿°úÁ¤
+		//ï¿½Ñ´Ü°ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
 		h->heap[parent] = h->heap[child];
 		parent = child;
 		child *= 2;
@@ -83,48 +83,59 @@ element element_delete_min_heap(HeapTypePtr h)
 
 }
 
-//ÀÌÁøÆ®¸® »ý¼º ÇÔ¼ö
-TreeNodePtr make_tree(TreeNodePtr left, TreeNodePtr right) 
+//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+TreeNodePtr make_tree(TreeNodePtr left, TreeNodePtr right)
 {
-	//µ¿Àû ³ëµå »ý¼º
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	TreeNodePtr node = (TreeNodePtr)malloc(sizeof(TreeNode));
 	if (node == NULL) {
-		fprintf(stderr, "¸Þ¸ð¸® ¿¡·¯\n");
+		fprintf(stderr, "ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 		exit(1);
 	}
-	//³ëµåÀÇ µÎ ÀÚ½Ä Ãß°¡
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú½ï¿½ ï¿½ß°ï¿½
 	node->left_child = left;
 	node->right_child = right;
 
-	//³ëµå ¹ÝÈ¯
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	return node;
 }
 
-//huffÆÄÀÏÀ» ÀÐ¾îµé¿© freqÆÄÀÏ·Î Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+void destroy_tree(TreeNodePtr root)
+{
+	if (root == NULL)
+		return;
+	destroy_tree(root->left_child);
+	destroy_tree(root->right_child);
+	//ï¿½Ò´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
+	free(root);
+}
+
+//huffï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½é¿© freqï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 void rw_huff() {
-	//ÆÄÀÏÀ» ÀÐ¾îµéÀÏ ¹è¿­°ú ºóµµ¸¦ ÀúÀåÇÏ±â À§ÇÑ ¹è¿­ ¼±¾ð
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½óµµ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½
 	char line[100];
 	int freq[30] = {0 };
 	char buf[10];
 	char sentence[10];
-	//huff.txtÆÄÀÏ ¿­±â
+	//huff.txtï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	FILE *fp = fopen("huff.txt", "r");
-	
-	//¿©´Â °úÁ¤¿¡¼­ ¿¡·¯ ¹ß»ý ½Ã Ç¥Çö
-	if (fp == EOF) 
+
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ Ç¥ï¿½ï¿½
+	if (fp == EOF)
 	{
 		printf("file is not open");
 		exit(1);
 	}
-	//¹®ÀÚ¿­À» ¹è¿­¿¡ ÀúÀåÇÑ´Ù
+	//ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	fgets(line, sizeof(line), fp);
-	//È®ÀÎÀ» À§ÇÏ Ãâ·Â
+	//È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	printf("%s\n", line);
 
-	//¹®ÀÚ¿­ÀÇ ±æÀÌ¸¸Å­ ¹Ýº¹À» ¼öÇàÇÏ¿© ºóµµ¼öÀÇ Ä«¿îÆ®¸¦ Áõ°¡½ÃÅ²´Ù.
+	//ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½Å­ ï¿½Ýºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½óµµ¼ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
 	for (int i = 0; i < strlen(line); i++)
 	{
-		//Æ¯¼ö¹®ÀÚÀÇ °æ¿ì º°µµ·Î Ä«¿îÆ®¸¦ Áõ°¡½ÃÅ²´Ù.
+		//Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
 		if (line[i] == '-') {
 			freq[26]++;
 		}
@@ -142,15 +153,15 @@ void rw_huff() {
 			freq[k]++;
 		}
 	}
-	//ÀÐ±â ¸ðµåÀÇ »óÅÂ¸¦ Á¾·áÇÑ´Ù.
+	//ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	fclose(fp);
 
-	//¾²±â¸ðµå·Î ´Ù½Ã ÆÄÀÏÀ» ¿¬´Ù
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	fp = fopen("freq.txt", "w");
 
-	//¹Ýº¹¹®À» ¼öÇàÇÏ¿© freq.txtÆÄÀÏ¿¡ ºóµµ¼ö¿¡ ´ëÇÑ ¹®Àå ÀÛ¼º
+	//ï¿½Ýºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ freq.txtï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½óµµ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	for (int j = 0; j < 30; j++) {
-		//Æ¯¼ö¹®ÀÚÀÇ °æ¿ì º°µµ·Î ÀÛ¼º
+		//Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 		if (j == 26) {
 			fprintf(fp, "- %d\n", freq[26]);
 		}
@@ -164,53 +175,104 @@ void rw_huff() {
 			fprintf(fp, "+ %d", freq[29]);
 		}
 		else {
-			//ºóµµ¼ö°¡ 0ÀÎ ¹®ÀÚ¸¦ ¹èÁ¦ ÈÄ ÀÌ¿ÜÀÇ ¾ËÆÄºªÀ» ÅØ½ºÆ® ÆÄÀÏ¿¡ Ãß°¡
+			//ï¿½óµµ¼ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ß°ï¿½
 			if (freq[j] == 0)
 				continue;
 			char cnt = (char)(97 + j);
 			fprintf(fp, "%c %d\n", cnt, freq[j]);
-		}	
+		}
 	}
-	//ÆÄÀÏ Á¾·á
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	fclose(fp);
 }
 
-//freqÆÄÀÏÀ» ÀÐ¾îµé¿© huff-tree¸¦ ±¸¼ºÇÏ´Â ÇÔ¼ö
+//freqï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½é¿© huff-treeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 void huff_tr() {
-	char line[100];
-	int freq[30] = { 0 };
-	char buf[10];
-	char sentence[10];
-	//freq.txtÆÄÀÏ ¿­±â
+	char line[10];
+	int i;
+	int cnt1 = 0, cnt2 = 0;
+	char alp[21];
+	int* num;
+
+	TreeNodePtr node, x;
+	HeapTypePtr heap;
+
+	element e, e1, e2;
+
+	heap = create();
+	init(heap);
+
+	//freq.txtï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	FILE* fp = fopen("freq.txt", "r");
 
-	//¿©´Â °úÁ¤¿¡¼­ ¿¡·¯ ¹ß»ý ½Ã Ç¥Çö
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ Ç¥ï¿½ï¿½
 	if (fp == EOF)
 	{
 		printf("file is not open");
 		exit(1);
 	}
-	//¹®ÀÚ¿­À» ¹è¿­¿¡ ÀúÀåÇÑ´Ù
-	fgets(line, sizeof(line), fp);
-	//È®ÀÎÀ» À§ÇÑ Ãâ·Â
-	printf(line);
 
+	while (fgets(line, sizeof(line), fp) != NULL)
+	{
+		cnt1++;
+	}
+	num = (int)malloc(sizeof(int) * cnt1);
+
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
+	fseek(fp, 0, SEEK_SET);
+
+	//ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
+	while (fgets(line, sizeof(line), fp) != NULL) {
+		printf(line);
+		alp[cnt2] = line[0];
+
+		if (line[3] != NULL) {
+			char a[2] = { line[2], line[3] };
+			num[cnt2] = atoi(a);
+		}
+		else if (line[3] == NULL)
+			num[cnt2] = line[2] - '0';
+
+		cnt2++;
+	}
+
+	for (i = 0; i < cnt2; i++) {
+		node = make_tree(NULL, NULL);
+		e.key = node->weight = num[i];
+		e.ptree = node;
+		insert_min_heap(heap, e);
+	}
+
+	for (i = 1; i < cnt2; i++) {
+		e1 = delete_min_heap(heap);
+		e2 = delete_min_heap(heap);
+
+		x = make_tree(e1.ptree, e2.ptree);
+		e.key = x->weight = e1.key + e2.key;
+		e.ptree = x;
+		insert_min_heap(heap, e);
+	}
+
+	e = delete_min_heap(heap);
+	destroy_tree(e.ptree);
+
+	free(heap);
 }
 
-//Æ®¸®¸¦ ÀÌ¿ëÇÏ¿© ÇãÇÁ¸¸ ÄÚµå¸¦ txtÆÄÀÏ¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ txtï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 void huff_code() {
 
 }
 
-//ÇãÇÁ¸¸ ÄÚµå°¡ ´ã±ä ÅØ½ºÆ®ÆÄÀÏ°ú ÃÖÃÊ ¸Þ¼¼Áö¸¦ ÀÎÄÚµùÇÏ´Â ÇÔ¼ö
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 void encoding(){
 }
 
-//ÀÎÄÚµùµÈ ¸Þ¼¼Áö¸¦ µðÄÚµùÇÏ¿© ¿ø·¡ ÇüÅÂ·Î ¹Ù²Ù´Â ÇÔ¼ö
+//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ù²Ù´ï¿½ ï¿½Ô¼ï¿½
 void decoding(){
 }
 
-//ÇØ´ç °úÁ¤À» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 void seq_print() {
 }
 
