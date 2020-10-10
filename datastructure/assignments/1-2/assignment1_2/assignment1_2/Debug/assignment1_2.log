@@ -1,10 +1,9 @@
 ﻿  main.c
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(125,15): warning C4047: '==': 'FILE *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(136,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(119,7): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(120,7): warning C4101: 'sentence' :참조되지 않은 지역 변수입니다.
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(209,15): warning C4047: '==': 'FILE *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(219,39): warning C4047: '=': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(229,22): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(233,27): warning C4047: '==': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-  assignment1_2.vcxproj -> C:\Users\dlswo\Documents\GitHub\2020-s\datastructure\assignments\1-2\assignment1_2\Debug\assignment1_2.exe
+D:\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+D:\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(124,15): warning C4047: '==': 'FILE *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+D:\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(135,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(208,15): warning C4047: '==': 'FILE *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+D:\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(217,39): warning C4047: '=': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+D:\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(227,22): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+D:\2020-s\datastructure\assignments\1-2\assignment1_2\assignment1_2\main.c(231,27): warning C4047: '==': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+  assignment1_2.vcxproj -> D:\2020-s\datastructure\assignments\1-2\assignment1_2\Debug\assignment1_2.exe

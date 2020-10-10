@@ -7,7 +7,7 @@
 
 typedef struct TreeNode* TreeNodePtr;
 
-//Ʈ������ ����ü ����
+//트리노드 생성 구조체
 typedef struct TreeNode
 {
 	int weight;
@@ -15,13 +15,13 @@ typedef struct TreeNode
 	TreeNodePtr right_child;
 }TreeNode;
 
-//����Ÿ���� �Ӽ� ����ü ����
+//힙요소 구조체
 typedef struct {
 	TreeNodePtr ptree;
 	int key;
 }element;
 
-//����Ÿ�� ����ü ����
+//힘타입 구조체
 typedef struct {
 	element heap[MAX_ELEMENT];
 	int heap_size;
@@ -29,34 +29,34 @@ typedef struct {
 
 typedef HeapType* HeapTypePtr;
 
-//���� ���� �Լ�
+//힙 생성 함수
 HeapTypePtr create() {
 	return (HeapTypePtr)malloc(sizeof(HeapType));
 }
-//���� �ʱ�ȭ �Լ�
+//힙 초기화 함수
 void init(HeapTypePtr h)
 {
 	h->heap_size = 0;
 }
 
-//���� ���� �Լ�
+//최소힙 삽입 함수
 void insert_min_heap(HeapTypePtr h, element item)
 {
-	//������ ũ�⸦ ���� ���� i
+	//힙 크기 할당
 	int i;
 	i = ++(h->heap_size);
 
-	//�θ������� �񱳹ݺ���
+	//반복문을 통해 힙의 높이 감소
 	while ((i != 1) && (item.key < h ->heap[i / 2].key))
 	{
 		h->heap[i] = h->heap[i / 2];
 		i /= 2;
 	}
-	//���ο� ���带 �ش� ��ġ�� ����
+	//힙의 위치 변경
 	h->heap[i] = item;
 }
 
-//�������� �Լ�
+//최소힙 삭제 함수
 element delete_min_heap(HeapTypePtr h)
 {
 	int parent, child;
@@ -68,12 +68,12 @@ element delete_min_heap(HeapTypePtr h)
 	child = 2;
 
 	while (child <= h->heap_size) {
-		//���� ������ �ڽĳ��� �� �� ���� �ڽ� ���带 ã�´�
+		//반복문을 통한 탐색
 		if ((child < h->heap_size) && (h->heap[child].key) > h->heap[child + 1].key)
 			child++;
 		if (temp.key <= h->heap[child].key)
 			break;
-		//�Ѵܰ� �Ʒ��� �̵�����
+		//힙의 위치를 변경
 		h->heap[parent] = h->heap[child];
 		parent = child;
 		child *= 2;
@@ -83,59 +83,58 @@ element delete_min_heap(HeapTypePtr h)
 
 }
 
-//����Ʈ�� ���� �Լ�
+//트리 생성함수
 TreeNodePtr make_tree(TreeNodePtr left, TreeNodePtr right)
 {
-	//���� ���� ����
+	//트리포인터 노드를 동적 할당
 	TreeNodePtr node = (TreeNodePtr)malloc(sizeof(TreeNode));
 	if (node == NULL) {
-		fprintf(stderr, "�޸��� ����\n");
+		fprintf(stderr, "에러 발생\n");
 		exit(1);
 	}
-	//������ �� �ڽ� �߰�
+	//각각의 오른, 왼 자식들을 할당
 	node->left_child = left;
 	node->right_child = right;
 
-	//���� ��ȯ
+	//노드 반환
 	return node;
 }
 
-//����Ʈ�� ���� �Լ�
+//트리 파괴 함수
 void destroy_tree(TreeNodePtr root)
 {
 	if (root == NULL)
 		return;
 	destroy_tree(root->left_child);
 	destroy_tree(root->right_child);
-	//�Ҵ��� �����Ͽ� ����
+	//할당 해제
 	free(root);
 }
 
-//huff������ �о��鿩 freq���Ϸ� �����ϴ� �Լ�
+//huff.txt 파일에서 freq.txt파일로 추출하는 함수
 void rw_huff() {
-	//������ �о����� �迭�� �󵵸� �����ϱ� ���� �迭 ����
+	//문자열 저장을 위한 배열과 빈도수 저장을 위한 배열 선언
 	char line[100];
 	int freq[30] = {0 };
-	char buf[10];
-	char sentence[10];
-	//huff.txt���� ����
+
+	//huff.txt 읽기모드로 열기
 	FILE *fp = fopen("huff.txt", "r");
 
-	//���� �������� ���� �߻� �� ǥ��
+	//에러발생시에 대한 예외처리
 	if (fp == EOF)
 	{
 		printf("file is not open");
 		exit(1);
 	}
-	//���ڿ��� �迭�� �����Ѵ�
+	//문자열을 받아온다.
 	fgets(line, sizeof(line), fp);
-	//Ȯ���� ���� ����
+	//문자열을 출력한다.
 	printf("%s\n", line);
 
-	//���ڿ��� ���̸�ŭ �ݺ��� �����Ͽ� �󵵼��� ī��Ʈ�� ������Ų��.
+	//반복문을 통해서 문자들을 걸러 빈도수배열을 채워나간다.
 	for (int i = 0; i < strlen(line); i++)
 	{
-		//Ư�������� ���� ������ ī��Ʈ�� ������Ų��.
+		//특수문자에 대한 예외는 별도로 처리
 		if (line[i] == '-') {
 			freq[26]++;
 		}
@@ -153,15 +152,15 @@ void rw_huff() {
 			freq[k]++;
 		}
 	}
-	//�б� ������ ���¸� �����Ѵ�.
+	//파일 닫기
 	fclose(fp);
 
-	//���������� �ٽ� ������ ����
+	//쓰기모드로 파일 open
 	fp = fopen("freq.txt", "w");
 
-	//�ݺ����� �����Ͽ� freq.txt���Ͽ� �󵵼��� ���� ���� �ۼ�
+	//반복문을 통해 각각의 빈도수를 적어내려간다.
 	for (int j = 0; j < 30; j++) {
-		//Ư�������� ���� ������ �ۼ�
+		//특수문자를 처리하기 위한 if 문
 		if (j == 26) {
 			fprintf(fp, "- %d\n", freq[26]);
 		}
@@ -175,18 +174,18 @@ void rw_huff() {
 			fprintf(fp, "+ %d", freq[29]);
 		}
 		else {
-			//�󵵼��� 0�� ���ڸ� ���� �� �̿��� ���ĺ��� �ؽ�Ʈ ���Ͽ� �߰�
+			//일반 문자에 대한 처리
 			if (freq[j] == 0)
 				continue;
 			char cnt = (char)(97 + j);
 			fprintf(fp, "%c %d\n", cnt, freq[j]);
 		}
 	}
-	//���� ����
+	//쓰기모드 파일 close
 	fclose(fp);
 }
 
-//freq������ �о��鿩 huff-tree�� �����ϴ� �Լ�
+//freq.txt파일을 통해 huff-tree생성
 void huff_tr() {
 	char line[10];
 	int i;
@@ -202,10 +201,10 @@ void huff_tr() {
 	heap = create();
 	init(heap);
 
-	//freq.txt���� ����
+	//freq.txt열기
 	FILE* fp = fopen("freq.txt", "r");
 
-	//���� �������� ���� �߻� �� ǥ��
+	//에러발생시에 대한 예외처리
 	if (fp == EOF)
 	{
 		printf("file is not open");
@@ -213,15 +212,14 @@ void huff_tr() {
 	}
 
 	while (fgets(line, sizeof(line), fp) != NULL)
-	{
 		cnt1++;
-	}
+
 	num = (int)malloc(sizeof(int) * cnt1);
 
-	//������ ó����ġ�� �̵�
+	//텍스트파일의 커서 위치를 다시 처음으로
 	fseek(fp, 0, SEEK_SET);
 
-	//���ڿ��� ���ڿ��� �迭�� �����Ѵ�
+	//한줄씩 문장을 읽어들여 알파벳 배열및 빈도수 배열에 저장
 	while (fgets(line, sizeof(line), fp) != NULL) {
 		printf(line);
 		alp[cnt2] = line[0];
@@ -236,6 +234,7 @@ void huff_tr() {
 		cnt2++;
 	}
 
+	//트리 생성 후 히프 삽입
 	for (i = 0; i < cnt2; i++) {
 		node = make_tree(NULL, NULL);
 		e.key = node->weight = num[i];
@@ -259,21 +258,17 @@ void huff_tr() {
 	free(heap);
 }
 
-//Ʈ���� �̿��Ͽ� ������ �ڵ带 txt���Ͽ� �����ϴ� �Լ�
+//허프만 코드 생성 함수
 void huff_code() {
 
 }
 
-//������ �ڵ尡 ���� �ؽ�Ʈ���ϰ� ���� �޼����� ���ڵ��ϴ� �Լ�
+//문장 인코딩 함수
 void encoding(){
 }
 
-//���ڵ��� �޼����� ���ڵ��Ͽ� ���� ���·� �ٲٴ� �Լ�
+//문장 디코딩 함수
 void decoding(){
-}
-
-//�ش� ������ �����ϴ� �Լ�
-void seq_print() {
 }
 
 int main()
