@@ -67,20 +67,16 @@
 
       <pre>
       <code>
-      {
       if-modified-since:
       <date>
-      }
       </code>
       <pre>
 
     * 서버는 캐시된 복사본이 최신의 것이면 객체가 생략된 응답을 전송
       <pre>
       <code>
-      {
       HTTP/1.0 304 Not
       Modified
-      }
       </code>
       <pre>
 
