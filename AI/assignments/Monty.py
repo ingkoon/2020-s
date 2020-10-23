@@ -6,9 +6,6 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 class Monty:
     def __init__(self):
-        self.car = 0
-        self.user = 0
-        self.doors = []
         self.winCnt = 0
 
     def assign_Car(self):
@@ -57,9 +54,8 @@ for i in range(100):
     changeUser.choice()
     changeUser.change()
     changeUser.check_win()
-print("총 승리 횟수 %d" %changeUser.winCnt)
-'''nonChangeUser = Monty()
 
+nonChangeUser = Monty()
 
 for i in range(100):
     nonChangeUser.assign_Car()
@@ -67,5 +63,5 @@ for i in range(100):
     nonChangeUser.Notchange()
     nonChangeUser.check_win()
 
-
-print("문을 변경하지 않았을 시, 총 승리 횟수 %d" %nonChangeUser.winCnt)'''
+print("총 승리 횟수 %d" %changeUser.winCnt)
+print("문을 변경하지 않았을 시, 총 승리 횟수 %d" %nonChangeUser.winCnt)
