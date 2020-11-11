@@ -9,16 +9,22 @@ typedef struct {
 	int v;
 	int weight;
 }edge;
+//간선에 대한 구조체
 
 typedef struct {
 	edge h[MAX_V];
 	int hs;
 }heap;
+// 최소힙에 대한 구조체
+
 typedef heap* heaptr;
+//구조체 포인터 선언
+
 int parent[MAX_V];
 int num[MAX_V];
 
 void init_set(int size);
+//
 void union_set(int i, int j);
 //int find_set(int vertex);
 int find_set(int i);
