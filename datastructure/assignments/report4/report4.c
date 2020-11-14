@@ -85,7 +85,7 @@ edge delete_heap_min(heaptr h)
 	//가장 마지막의 노드를 가져온다.
 	int i = 1, j = 2;
 
-	h->hSize = h->hSize - 1;
+	h->hSize--;
 	//힙사이즈를 하나 감소시킨다.
 	while (j <= h->hSize)
 	{
@@ -116,6 +116,7 @@ void insert_edge_vertex(heaptr h)
 	insert_heap(h, 4, 6, 25);
 	insert_heap(h, 0, 5, 10);
 	*/
+
 	insert_heap(h, 0, 1, 10);
 	insert_heap(h, 0, 3, 6);
 	insert_heap(h, 0, 7, 1);
@@ -128,6 +129,7 @@ void insert_edge_vertex(heaptr h)
 	insert_heap(h, 4, 7, 8);
 	insert_heap(h, 5, 6, 9);
 	insert_heap(h, 6, 7, 12);
+
 }
 
 void union_set(int s1, int s2) {
@@ -156,7 +158,6 @@ void kruskal(int n)
 	insert_edge_vertex(h);
 	//사용자의 요구에 맞게 간선 삽입
 	init_set(n);
-	// 집합 초기화
 
 	while (cnt < (n - 1))
 	{
@@ -176,12 +177,13 @@ void kruskal(int n)
 
 }
 
-
-
-
-
 int main()
 {
-	kruskal(7);
+	int input;
+	printf("Plese insert vertex's count: ");
+
+	scanf("%d", &input);
+
+	kruskal(input);
 	return 0;
 }
