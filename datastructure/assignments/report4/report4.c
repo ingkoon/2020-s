@@ -23,33 +23,7 @@ typedef heap* heaptr;
 int parent[MAX_V];
 int num[MAX_V];
 
-void init_set(int size);
-//
-void union_set(int i, int j);
-//int find_set(int vertex);
-int find_set(int i);
-void insert_edge_all(heaptr h);
 
-void heap_print(heaptr h);
-void insert_heap_min(heaptr h, edge e);
-void insert_heap(heaptr h, int u, int v, int weight);
-edge delete_heap_min(heaptr h);
-void kruskal(int n);
-
-int main()
-{
-	/*int graph[MAX][MAX] = {
-		{INF,7,INF,INF,3,10,INF},
-		{7,INF,4,10,2,6,INF},
-		{INF,4,INF,2,INF,INF,INF},
-		{INF,10,2,INF,11,9,4},
-		{3,2,INF,11,INF,INF,5},
-		{10,6,INF,9,INF,INF,INF},
-		{INF,INF,INF,4,5,INF,INF} };*/
-	kruskal(7);
-
-	return 0;
-}
 void init_set(int size)
 {
 	for (int i = 0; i < size; i++)
@@ -118,20 +92,17 @@ edge delete_heap_min(heaptr h)
 	return value;
 }
 
-void insert_edge_all(heaptr h)
+void insert_edge(heaptr h)
 {
-	insert_heap(h, 0, 1, 7);
-	insert_heap(h, 0, 4, 3);
 	insert_heap(h, 0, 5, 10);
-	insert_heap(h, 1, 2, 4);
-	insert_heap(h, 1, 4, 2);
-	insert_heap(h, 1, 5, 6);
-	insert_heap(h, 1, 3, 10);
-	insert_heap(h, 2, 3, 2);
-	insert_heap(h, 3, 4, 11);
-	insert_heap(h, 3, 6, 4);
-	insert_heap(h, 3, 5, 9);
-	insert_heap(h, 4, 6, 5);
+	insert_heap(h, 0, 1, 29);
+	insert_heap(h, 1, 2, 16);
+	insert_heap(h, 1, 6, 15);
+	insert_heap(h, 2, 3, 12);
+	insert_heap(h, 3, 4, 22);
+	insert_heap(h, 3, 6, 18);
+	insert_heap(h, 4, 5, 27);
+	insert_heap(h, 4, 6, 25);
 }
 /*
 int find_set(int vertex) {
@@ -143,6 +114,19 @@ int find_set(int vertex) {
 	return s;
 }
 */
+
+void union_set(int s1, int s2) {
+	if (num[s1] < num[s2]) {
+		parent[s1] = s2;
+		num[s2] += num[s1];
+	}
+	else {
+		parent[s2] = s1;
+		num[s1] += num[s2];
+	}
+}
+
+
 void kruskal(int n)
 {
 	int edge_num = 0;
@@ -150,7 +134,7 @@ void kruskal(int n)
 	h->hs = 0;
 	int uset, vset;
 	edge e;
-	insert_edge_all(h);
+	insert_edge(h);
 	init_set(n);
 
 	while (edge_num < (n - 1))
@@ -160,7 +144,7 @@ void kruskal(int n)
 		vset = find_set(e.v);
 		if (uset != vset)
 		{
-			printf("(%d.%d)간선 가중치:%d 연결합니다!!\n", e.u, e.v, e.weight);
+			printf("(%d.%d)Edge Weight: %d was connected\n", e.u, e.v, e.weight);
 			edge_num++;
 			union_set(uset,vset);
 		}
@@ -178,13 +162,11 @@ void heap_print(heaptr h)
 	}
 }
 
-void union_set(int s1, int s2) {
-	if (num[s1] < num[s2]) {
-		parent[s1] = s2;
-		num[s2] += num[s1];
-	}
-	else {
-		parent[s2] = s1;
-		num[s1] += num[s2];
-	}
+
+
+int main()
+{
+	kruskal(7);
+
+	return 0;
 }
