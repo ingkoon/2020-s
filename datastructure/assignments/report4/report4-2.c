@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define MAX 50
+#define MAX_V 50
+#define INF 1000
 
 typedef struct {
 	int u;
@@ -12,9 +14,9 @@ typedef struct {
 //간선에 대한 구조체
 
 typedef struct {
-	edge h[MAX];
+	edge h[MAX_V];
 	//간선의 집합을 갖고있는 힙구조
-	int hSize;
+	int hs;
 	//힙의 크기
 }heap;
 // 최소힙에 대한 구조체
@@ -22,8 +24,9 @@ typedef struct {
 typedef heap* heaptr;
 //구조체 포인터 선언
 
-int parent[MAX];
-int num[MAX];
+int parent[MAX_V];
+int num[MAX_V];
+
 
 void init_set(int size)
 {
@@ -37,31 +40,29 @@ void init_set(int size)
 
 int find_set(int i)
 {
-	// 사이클 여부 확인
 	int temp = i;
 	//임시 변수 할당
 	while (parent[temp] >= 0)
 		temp = parent[temp];
+	//
 
-	/*int temp2 = temp;
+	int temp2 = temp;
 	int temp3;
 	while (parent[temp2] >= 0)
 	{
 		temp3 = parent[temp2];
 		parent[temp2] = temp;
 		temp2 = temp3;
-	}*/
+	}
 	return temp;
 }
 
 
-void insert_min_heap(heaptr h, edge e)
-// 최소 히프 삽입 알고리즘
+void insert_heap_min(heaptr h, edge e)
+// 히프 삽입 알고리즘
 {
-	int i = ++h->hSize;
-	//히프의 크기를 하나 증가시킨다.
+	int i = ++h->hs;
 	while (i > 0 && e.weight < h->h[i / 2].weight)
-	//i가 0보다 크고, 가중치의 값이 상위 레벨의 노드보다 작을 경우 교체수행
 	{
 		h->h[i] = h->h[i / 2];
 		i = i / 2;
@@ -75,21 +76,21 @@ void insert_heap(heaptr h, int u, int v, int weight)
 	e.u = u;
 	e.v = v;
 	e.weight = weight;
-	insert_min_heap(h, e);
+	insert_heap_min(h, e);
 }
 edge delete_heap_min(heaptr h)
 {
 	edge value = h->h[1];
 	//최소힙의 첫번째 노드를 가져온다
-	edge temp = h->h[h->hSize];
+	edge temp = h->h[h->hs];
 	//가장 마지막의 노드를 가져온다.
 	int i = 1, j = 2;
 
-	h->hSize = h->hSize - 1;
+	h->hs = h->hs - 1;
 	//힙사이즈를 하나 감소시킨다.
-	while (j <= h->hSize)
+	while (j <= h->hs)
 	{
-		if (j < h->hSize && h->h[j].weight > h->h[j + 1].weight)
+		if (j < h->hs && h->h[j].weight > h->h[j + 1].weight)
 			j++;
 			//힙사이즈가 2보다 작거나 다음
 
@@ -141,13 +142,23 @@ void union_set(int s1, int s2) {
 	}
 }
 
+void heap_print(heaptr h)
+{
+	int i = 1;
+	while (i <= h->hs)
+	{
+		printf("(%d %d) weight:%d\n", h->h[i].u, h->h[i].v, h->h[i].weight);
+		i++;
+	}
+}
+
 void kruskal(int n)
 {
 	int cnt = 0;
 	//간선의 개수에 대한 변수 할당
 	heaptr h = (heaptr)malloc(sizeof(heap));
 	// 최소 힙 구조를 위한 힙 변수 할당
-	h->hSize = 0;
+	h->hs = 0;
 	// 힙의 크기를 0으로 설정
 	int uset, vset;
 	// 정점에 대한 집합 변수 선언
@@ -164,16 +175,16 @@ void kruskal(int n)
 		//최소힙의 첫번째 원소를 가져온다.
 		uset = find_set(e.u);
 		vset = find_set(e.v);
-		// 각각의 정점을 가져온다
+		// 각각의 정점으 가져온다
 		if (uset != vset)
+		//
 		{
-			printf("%d to %d Edge Weight: %d was selected.\n", e.u, e.v, e.weight);
+			printf("(%d.%d)Edge Weight: %d was connected\n", e.u, e.v, e.weight);
 			cnt++;
 			union_set(uset,vset);
 		}
 	}
 	free(h);
-
 }
 
 
