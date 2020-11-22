@@ -1,3 +1,5 @@
+import numpy as np
+import matplotlib.pyplot as plt
 
 #출력함수 계산
 def calculate(input):
@@ -31,18 +33,26 @@ def train_weights(X, y, l_rate, n_epoch):
         weights[i] = weights[i] + l_rate * error * row[i]
 
       print(weights, bias)
-    print('epoch number is %d, study rate is %.3f, error rate is %.3f' %(epoch,l_rate, sum_error))
+      print(actual)
+      print('epoch number is %d, study rate is %.3f, error rate is %.3f' %(n_epoch,l_rate, sum_error))
     return weights
 
 # 샘플과 레이블이다.
-X = [[0,0],[0,1],[1,0],[1,1]]
-y = [0, 0, 0, 1]
+X = [[0,0],[0,10],[4,2],[10,1]]
+y = [1, 0, 0, 1]
 
 # 가중치와 바이어스 초기값
 weights = [0.0, 0.0]
 bias = 0.0
 
 l_rate = 0.1
-n_epoch = 5
+n_epoch = 100
 weights = train_weights(X, y, l_rate, n_epoch)
-print(weights, bias)
+print(weights)
+resultX = []
+resultXy = []
+for i in range(len(X)):
+    resultX.append(X[i][0])
+    resultXy.append(X[i][1])
+plt.scatter(X[0],X[1], color = 'red', marker='o')
+plt.show()
