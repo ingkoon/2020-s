@@ -41,7 +41,7 @@ void insert_heap(heaptr h, int val, int loc)
 	h->h[i].loc = loc;
 }
 
-int delete_heap_min(heaptr h)
+/*int delete_heap_min(heaptr h)
 {
 	int value = h->h[1].val;
 	//최소힙의 첫번째 노드를 가져온다
@@ -67,32 +67,7 @@ int delete_heap_min(heaptr h)
 	}
 	h->h[i].val = temp;
 	return value;
-}
-
-
-
-int get_min_vertex(int n) {
-	int v;
-
-	// 아직까지 방문하지 않은 node를 앞 순서부터 찾아낸다.
-	for (int i = 0; i < n; i++) {
-		if (visited[i] == 0) {
-			v = i;
-			break;
-		}
-	}
-
-	// 앞에서 찾아낸 v 인덱스의 node보다 dist[]가 짧은 게 있다면?
-	// 위 아래 for문을 합치면, 섬처럼 갇혀 있는 node에 대한 탐색이 불가능하다.
-	// 1-2-3과 4로 이루어진 그래프는 4의 dist[]가 항상 INF이므로.
-
-	for (int i = 0; i < n; i++) {
-		if (visited[i] == false && (dist[i] < dist[v])) {
-			v = i;
-		}
-	}
-	return v;
-}
+}*/
 
 int* prim(int g[MAX][MAX], int tree[MAX])
 //배열을 반환하는 prim 알고리즘
@@ -102,22 +77,22 @@ int* prim(int g[MAX][MAX], int tree[MAX])
 
 	int i, u, v;
 
-	  for (u = 0; u < n; u++)  // dist배열과 selected배열의 정보를 초기화
-	  {
-	    dist[u] = INF;
-	    selected[u] = FALSE;
-	  }
+	for(int inLoc = 0; inLoc< MAX; inLoc++)
+	{
+			int inVal = g[0][inLoc];
+			insert_heap(h,inVal,inLoc);
+	}
 
-	  dist[s] = 0;  // 시작정점과 시작정점간의 거리는 0이다. 자기자신을 순환하는 경로는 없다고 가정한다.
-
-	  for (i = 0; i < n; i++)
+	for (i = 0; i < MAX; i++)
 	  {
 	    // 리턴된 정점 번호를 u에 저장한다. u는 최소거리를 가지는 정점. 손으로 썻을 때 선택하는 효과를 가져온다.
-	    u = get_min_vertex(n);
+	    result = h[i]->val;
+			u = h[i]->loc;
+
 	    visited[u] = TRUE; // 최소거리를 갖는 정점의 정보(u)를 알아냈으니 해당 정점을 선택했다고 표시한다.
 
 	    // 만약 경로가 없다면 함수를 종료한다. 정상적인 신장트리의 정보가 들어왔다면 실행될 일은 없을 것이다.
-	    if (dist[u] == INF) return;
+	    if (h[u]->val == INF) return;
 
 
 	    for (int v = 0; v < n; v++)  // 이 과정은 우리가 새롭게 발견한 정보를 저장하는 과정이다.
@@ -140,6 +115,14 @@ int* prim(int g[MAX][MAX], int tree[MAX])
 		free(h);
 }
 
+
+void print(int tree[MAX])
+{
+	for(int i = 0; i< MAX-1; i++)
+		printf("%d - ", &tree[i]);
+
+	printf("%d", &tree[MAX-1]);
+}
 
 int main()
 {
