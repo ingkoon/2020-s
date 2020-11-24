@@ -21,7 +21,9 @@ typedef struct {
 
 typedef heap* heaptr;
 //구조체 포인터 선언
+
 int visited = {0};
+//방문여부에 대한 배열 변수 선언
 
 void insert_heap(heaptr h, int val, int loc)
 {
@@ -41,41 +43,13 @@ void insert_heap(heaptr h, int val, int loc)
 	h->h[i].loc = loc;
 }
 
-/*int delete_heap_min(heaptr h)
-{
-	int value = h->h[1].val;
-	//최소힙의 첫번째 노드를 가져온다
-	int temp = h->h[h->hSize].val;
-	int tempLoc = h->h[h->hSize].loc;
-	//가장 마지막의 노드를 가져온다.
-	int i = 1, j = 2;
-
-	h->hSize--;
-	//힙사이즈를 하나 감소시킨다.
-	while (j <= h->hSize)
-	{
-		if (j < h->hSize && h->h[j].val > h->h[j + 1].val)
-			j++;
-		//힙사이즈가 2보다 작거나 다음
-
-		if (temp < h->h[j].val)
-			break;
-		// 가장 마지막 값의 가중치가 2번째 간선의 가중치보다 작을 경우 중지
-		h->h[i] = h->h[j];
-		i = j;
-		j *= 2;
-	}
-	h->h[i].val = temp;
-	return value;
-}*/
-
 int* prim(int g[MAX][MAX], int tree[MAX])
 //배열을 반환하는 prim 알고리즘
 {
 	//최소힙 생성을 위한 힙 동적 선언
 	heaptr h = (heaptr)malloc(sizeof(heap));
 
-	int i, u, v;
+	int i, u, v, result;
 
 	for(int inLoc = 0; inLoc< MAX; inLoc++)
 	{
@@ -89,24 +63,24 @@ int* prim(int g[MAX][MAX], int tree[MAX])
 	    result = h[i]->val;
 			u = h[i]->loc;
 
-	    visited[u] = TRUE; // 최소거리를 갖는 정점의 정보(u)를 알아냈으니 해당 정점을 선택했다고 표시한다.
+			// 최소거리를 갖는 정점의 정보(u)를 알아냈으니 해당 정점을 선택됨을 표시한다.
+	    visited[u] = TRUE;
+
+			tree[u] = result;
 
 	    // 만약 경로가 없다면 함수를 종료한다. 정상적인 신장트리의 정보가 들어왔다면 실행될 일은 없을 것이다.
 	    if (h[u]->val == INF) return;
 
-
-	    for (int v = 0; v < n; v++)  // 이 과정은 우리가 새롭게 발견한 정보를 저장하는 과정이다.
-	    // 직접적인 경로가 발견되어 INF 에서 상수거리로 바뀌는 과정과
-	    // 기존의 상수거리보다 더 짧은 거리가 발견되 그 정보를 갱신하는 과정이 포함되어 있다.
+			//새롭게 발견한 정보를 저장.
+	    for (int v = 0; v < n; v++)
 	    {
 	      // 선택된 u 정점을 기준으로 정점(u)과 연결되어 있는 정점까지의 거리를 각각 비교한다.
 	      if (g[u][v] != INF)  // 정점 u와 연결이 되어있고
 	      {
-	        // 아직 선택되지 않았으며 해당 변(g[u][v])의 길이가 기존의 dist[v] 값보다 작다면
-	        if (selected[v] == 0 && g[u][v] < dist[v])
-	          h[v]->val = g[u][v]; // dist[v]의 값을 갱신해준다.
 
-	        // 새롭게 발견되는 정점들이 초반에 저장될 수 있는 건 INF를 1000으로 설정해줬기 때문이다.
+	        if (visited[v] == 0 && g[u][v] < h[v]->val)
+						//값을 갱신
+	          h[v]->val = g[u][v];
 	        // 우리가 만든 그래프의 경로값들은 전부 100이하의 값이기 때문에 새롭게 발견되는 정점이 있다면
 	        // 우선 등록되고 그 후 더 짧은 거리가 등장하면 갱신되는 형태로 이 프로그램은 작동한다.
 	      }
