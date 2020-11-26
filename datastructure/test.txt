@@ -1,0 +1,155 @@
+
+LeeInJae CREATE TABLE S (
+  2         S#     CHAR(3)    PRIMARY KEY,
+  3         SNAME CHAR(5),
+  4         STATUS NUMBER(2),
+  5         CITY  CHAR(7));
+
+테이블이 생성되었습니다.
+
+LeeInJae
+LeeInJae INSERT INTO S VALUES ('S1','HONG','20','SEOUL');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO S VALUES ('S2','SON', '10','PUSAN');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO S VALUES ('S3','PARK','30','PUSAN');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO S VALUES ('S4','SHIN','20','SEOUL');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO S VALUES ('S5','BAHN','30','KYUNGJU');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae
+LeeInJae
+LeeInJae CREATE TABLE P (
+  2         P#     CHAR(3)  NOT NULL PRIMARY KEY,
+  3         PNAME  CHAR(5),
+  4         COLOR  CHAR(5),
+  5         WEIGHT NUMBER(3),
+  6         CITY  CHAR(7));
+
+테이블이 생성되었습니다.
+
+LeeInJae
+LeeInJae INSERT INTO P VALUES ('P1', 'NUT',   'RED',   12, 'SEOUL');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO P VALUES ('P2', 'BOLT',  'GREEN', 17, 'PUSAN');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO P VALUES ('P3', 'SCREW', 'BLUE',  17, 'KWANGJU');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO P VALUES ('P4', 'SCREW', 'RED',   14, 'SEOUL');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO P VALUES ('P5', 'CAM',   'BLUE',  12, 'PUSAN');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO P VALUES ('P6', 'COCK',  'RED',   19, 'SEOUL');
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae
+LeeInJae
+LeeInJae CREATE TABLE SP (
+  2         S#   CHAR(3),
+  3         P#   CHAR(3),
+  4         QTY  NUMBER(5),
+  5         PRIMARY KEY (S#,P#),
+  6         FOREIGN KEY(S#) REFERENCES S,
+  7         FOREIGN KEY(P#) REFERENCES P,
+  8         CHECK (QTY>10));
+
+테이블이 생성되었습니다.
+
+LeeInJae
+LeeInJae INSERT INTO SP VALUES ('S1','P1',300);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S1','P2',200);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S1','P3',400);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S1','P4',200);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S1','P5',100);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S1','P6',100);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S2','P1',300);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S2','P2',400);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S3','P2',200);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S4','P2',200);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S4','P4',300);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae INSERT INTO SP VALUES ('S4','P5',400);
+
+1 개의 행이 만들어졌습니다.
+
+LeeInJae delete from sp;
+
+12 행이 삭제되었습니다.
+
+LeeInJae commit;
+
+커밋이 완료되었습니다.
+
+LeeInJae select * from sp;
+
+S#  P#         QTY
+--- --- ----------
+S1  P1         300
+S1  P2         200
+S1  P3         400
+S1  P4         200
+S1  P5         100
+S1  P6         100
+S2  P1         300
+S2  P2         400
+S3  P2         200
+S4  P2         200
+S4  P4         300
+S4  P5         400
+
+12 개의 행이 선택되었습니다.
+
