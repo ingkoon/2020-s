@@ -30,12 +30,12 @@ def train_weights(X, y, l_rate, n_epoch):
 # XOR 연산 학습 데이터셋
 # 샘플과 레이블이다.
 X = [[0,0],[0,1],[1,0],[1,1]]
-y = [0, 0, 0, 1]
+y = [0, 1, 1, 0]
 
 weights = [0.0, 0.0]
 bias = 0.0
 
 l_rate = 0.1		# 학습률
-n_epoch = 100		# 에포크 횟수
+n_epoch = 1000		# 에포크 횟수
 weights = train_weights(X, y, l_rate, n_epoch)
 print(weights, bias)
